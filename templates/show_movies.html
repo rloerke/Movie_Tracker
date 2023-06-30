@@ -18,7 +18,29 @@
                 <div class="blog-post m-3 p-3" id="movies">
                     <div class="row">
 
-                    <div class="col-9 text-center" id="title"><h4>{{ movie.title }}</h4></div>
+                        <div class="row my-2">
+                            <div class="col-2 text-center" id="title"><h4>{{ movie.title }}</h4></div>
+                        </div>
+
+                        <div class="row my-2">
+                            <div class="col-2 text-center" id="description"><p>{{ movie.description }}</p></div>
+                        </div>
+
+                        <div class="row my-2">
+                            <div class="col-2 text-center" id="imdb"><h5>{{ movie.imdbRating }}</h5></div>
+                        </div>
+
+                        <div class="row my-2">
+                            <div class="col-2 text-center" id="rtCritic"><h5>{{ movie.rtCriticRating }}</h5></div>
+                        </div>
+
+                        <div class="row my-2">
+                            <div class="col-2 text-center" id="rtAudience"><h5>{{ movie.rtAudienceRating }}</h5></div>
+                        </div>
+
+                        <div class="row my-2">
+                            <div class="col-2 text-center" id="meta"><h5>{{ movie.metaRating }}</h5></div>
+                        </div>
 
                     </div>
                 </div>
