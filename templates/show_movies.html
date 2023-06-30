@@ -8,45 +8,33 @@
 
 {% block body %}
     <main role="main" class="container">
-    <div class="row" id="row_main">
+    <div class="row">
 
-        <div class="col-1" id="divider"></div>
-
-        <div class="col-9">
-            <div class="blog-main">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>IMDB Rating</th>
+                    <th>Metacritic Rating</th>
+                    <th>Rotten Tomatoes Audience Rating</th>
+                    <th>Rotten Tomatoes Critic Rating</th>
+                </tr>
+            </thead>
+            <tbody>
                 {% for movie in movies %}
-                <div class="blog-post m-3 p-3" id="movies">
-                    <div class="row">
-
-                        <div class="row my-2">
-                            <div class="col-2 text-center" id="title"><h4>{{ movie.title }}</h4></div>
-                        </div>
-
-                        <div class="row my-2">
-                            <div class="col-2 text-center" id="description"><p>{{ movie.description }}</p></div>
-                        </div>
-
-                        <div class="row my-2">
-                            <div class="col-2 text-center" id="imdb"><h5>{{ movie.imdbRating }}</h5></div>
-                        </div>
-
-                        <div class="row my-2">
-                            <div class="col-2 text-center" id="rtCritic"><h5>{{ movie.rtCriticRating }}</h5></div>
-                        </div>
-
-                        <div class="row my-2">
-                            <div class="col-2 text-center" id="rtAudience"><h5>{{ movie.rtAudienceRating }}</h5></div>
-                        </div>
-
-                        <div class="row my-2">
-                            <div class="col-2 text-center" id="meta"><h5>{{ movie.metaRating }}</h5></div>
-                        </div>
-
-                    </div>
-                </div>
+                <tr>
+                    <td>{{ movie.title }}</td>
+                    <td>{{ movie.description }}</td>
+                    <td>{{ movie.imdbRating }}</td>
+                    <td>{{ movie.metaRating }}</td>
+                    <td>{{ movie.rtAudienceRating }}</td>
+                    <td>{{ movie.rtCriticRating }}</td>
+                </tr>
                 {% endfor %}
-            </div>
-        </div>
+            </tbody>
+        </table>
+
     </div>
     </main>
 {% endblock %}
