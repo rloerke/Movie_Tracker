@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <div class="jumbotron p-1 p-md-1 bg-white text-center">
+        <h1 class="display-4 font-italic" id="category_title">Movies</h1>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <main role="main" class="container">
+    <div class="row" id="row_main">
+
+        <div class="col-1" id="divider"></div>
+
+        <div class="col-9">
+            <div class="blog-main">
+                {% for movie in movies %}
+                <div class="blog-post m-3 p-3" id="movies">
+                    <div class="row">
+
+                    <div class="col-9 text-center" id="title"><h4>{{ movie.title }}</h4></div>
+
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    </main>
+{% endblock %}
