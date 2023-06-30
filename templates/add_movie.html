@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <div class="jumbotron p-1 p-md-1 bg-white text-center">
+        <h1 class="display-4 font-italic" id="category_title">Add Movie</h1>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+          <body class="text-center">
+          <form class="form-signin" action="{{ url_for('add_db') }}" method="post">
+
+            <label for="form_title" class="sr-only">Title</label>
+            <input name="title" class="form-control" placeholder="Title" id="form_title" required autofocus>
+            <label for="form_description" class="sr-only">Description</label>
+            <textarea name="description" class="form-control mt-2" rows="6" placeholder="Description" id="form_description" required></textarea>
+            <label for="form_imdb" class="sr-only">IMDB Rating</label>
+            <input name="imdb" class="form-control mt-2" placeholder="IMDB Rating" id="form_imdb">
+            <label for="form_meta" class="sr-only">Metacritic Rating</label>
+            <input name="meta" class="form-control mt-2" placeholder="Metacritic Rating" id="form_meta">
+            <label for="form_rt_audience" class="sr-only">Rotten Tomatoes Audience Rating</label>
+            <input name="rt_audience" class="form-control mt-2" placeholder="Rotten Tomatoes Audience Rating" id="form_rt_audience">
+            <label for="form_rt_critic" class="sr-only">Rotten Tomatoes Critic Rating</label>
+            <input name="rt_critic" class="form-control mt-2" placeholder="Rotten Tomatoes Critic Rating" id="form_rt_critic">
+
+            <button class="btn btn-lg btn-primary btn-block mt-4" type="submit" id="register_button">Submit</button>
+          </form>
+          </body>
+        </div>
+        <div class="col-4"></div>
+    </div>
+{% endblock %}

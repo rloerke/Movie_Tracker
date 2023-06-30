@@ -67,3 +67,25 @@ def show_movies():
 
     return render_template('show_movies.html', movies=movies)
 
+
+@app.route('/add')
+# Redirects to a form for writing notes
+def add_movie():
+    return render_template('add_movie.html')
+
+
+@app.route('/add-db', methods=['POST'])
+# Adds a new note to the database
+def add_db():
+    db = get_db()
+
+    # Add the post into the database
+    db.execute('INSERT INTO movies (title, description, imdbRating, metaRating, rtAudienceRating, rtCriticRating) '
+               'VALUES (?, ?, ?, ?, ?, ?)',
+               [request.form['title'], request.form['description'], request.form['imdb'],
+                request.form['meta'], request.form['rt_audience'], request.form['rt_critic']])
+    db.commit()
+
+    # Notify the user their post was made successfully
+    flash('Your Movie has been added successfully!')
+    return redirect(url_for('start'))
