@@ -10,7 +10,7 @@ create table movies (
 );
 
 INSERT INTO movies (title, description, imdbRating, rtCriticRating, rtAudienceRating, metaRating) VALUES ("Inception",
-"A group of people try to plant an idea in someones head through their dreams", "8.8", "8.7", "9.1", "7.4");
+"A group of people try to plant an idea in someones head through their dreams", "88", "87", "91", "74");
 
 INSERT INTO movies (title, description, imdbRating, rtCriticRating, rtAudienceRating, metaRating) VALUES (
-"Grosse Pointe Blank", "A professional hitman attends his high school reunion", "7.3", "7.6", "8.2", "8.7");
+"Grosse Pointe Blank", "A professional hitman attends his high school reunion", "73", "76", "82", "87");
