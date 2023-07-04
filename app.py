@@ -1,9 +1,9 @@
 # Stuff
 
 import os
-from werkzeug.security import generate_password_hash, check_password_hash
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, g, redirect, url_for, render_template, flash
+import scrape
 
 # Create the application
 app = Flask(__name__)
@@ -55,6 +55,7 @@ def close_db(error):
 
 @app.route('/', methods=['GET'])
 def start():
+    scrape.scrape_data('', '')
     return redirect(url_for('show_movies'))
 
 
