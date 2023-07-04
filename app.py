@@ -55,7 +55,6 @@ def close_db(error):
 
 @app.route('/', methods=['GET'])
 def start():
-    scrape.scrape_data('', '')
     return redirect(url_for('show_movies'))
 
 
@@ -89,4 +88,19 @@ def add_db():
 
     # Notify the user their post was made successfully
     flash('Your Movie has been added successfully!')
+    return redirect(url_for('start'))
+
+
+@app.route('/insert', methods=['POST'])
+def insert_movie():
+    db = get_db()
+    data = scrape.scrape_data('https://www.imdb.com/title/tt1397514/',
+                              'https://www.rottentomatoes.com/m/journey_to_the_center_of_the_earth_2_3d')
+    db.execute('INSERT INTO movies (title, description, imdbRating, metaRating, rtAudienceRating, rtCriticRating) '
+               'VALUES (?, ?, ?, ?, ?, ?)', [data['title'], data['description'], data['imdb_rating'],
+                                             data['meta_rating'], data['rt_audience'], data['rt_critic']])
+    db.commit()
+
+    # Notify the user their post was made successfully
+    flash('Your Movie has been inserted successfully!')
     return redirect(url_for('start'))

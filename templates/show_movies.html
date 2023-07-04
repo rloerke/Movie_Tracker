@@ -8,6 +8,10 @@
     <div class="d-grid gap-2 d-md-flex justify-content-md-end p-4">
         <a href="/add" class="btn btn-primary me-md-2" role="button" id="add_button">Add Movie</a>
     </div>
+
+    <form class="d-grid gap-2 d-md-flex justify-content-md-end p-4" action="{{ url_for('insert_movie') }}" method="post">
+        <button class="btn btn-primary me-md-2" type="submit" id="insert_button">Insert Movie</button>
+    </form>
 {% endblock %}
 
 {% block body %}
