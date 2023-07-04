@@ -1,5 +1,5 @@
-drop table if exists movies;
-create table movies (
+DROP TABLE if EXISTS movies;
+CREATE TABLE movies (
     movieID integer primary key autoincrement unique,
     title text not null,
     description text,

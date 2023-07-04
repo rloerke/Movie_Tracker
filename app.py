@@ -91,8 +91,8 @@ def add_db():
     return redirect(url_for('start'))
 
 
-@app.route('/insert', methods=['POST'])
-def insert_movie():
+@app.route('/scrape', methods=['POST'])
+def scrape_movies():
     db = get_db()
     url_list = scrape.find_addr()
 
@@ -104,5 +104,5 @@ def insert_movie():
         db.commit()
 
     # Notify the user their post was made successfully
-    flash('Your Movie has been inserted successfully!')
+    flash('Your Movie List has been Updated Successfully!')
     return redirect(url_for('start'))

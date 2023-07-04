@@ -9,8 +9,8 @@
         <a href="/add" class="btn btn-primary me-md-2" role="button" id="add_button">Add Movie</a>
     </div>
 
-    <form class="d-grid gap-2 d-md-flex justify-content-md-end p-4" action="{{ url_for('insert_movie') }}" method="post">
-        <button class="btn btn-primary me-md-2" type="submit" id="insert_button">Insert Movie</button>
+    <form class="d-grid gap-2 d-md-flex justify-content-md-end p-4" action="{{ url_for('scrape_movies') }}" method="post">
+        <button class="btn btn-primary me-md-2" type="submit" id="scrape_button">Find New Movies</button>
     </form>
 {% endblock %}
 
@@ -34,10 +34,26 @@
                 <tr>
                     <td>{{ movie.title }}</td>
                     <td>{{ movie.description }}</td>
+                    {% if movie.imdbRating == '' %}
+                    <td>None</td>
+                    {% else %}
                     <td>{{ movie.imdbRating }}</td>
+                    {% endif %}
+                    {% if movie.metaRating == '' %}
+                    <td>None</td>
+                    {% else %}
                     <td>{{ movie.metaRating }}</td>
+                    {% endif %}
+                    {% if movie.rtAudienceRating == '' %}
+                    <td>None</td>
+                    {% else %}
                     <td>{{ movie.rtAudienceRating }}</td>
+                    {% endif %}
+                    {% if movie.rtCriticRating == '' %}
+                    <td>None</td>
+                    {% else %}
                     <td>{{ movie.rtCriticRating }}</td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>
