@@ -27,6 +27,7 @@
                     <th>Metacritic Rating</th>
                     <th>Rotten Tomatoes Audience Rating</th>
                     <th>Rotten Tomatoes Critic Rating</th>
+                    <th>Average Rating</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,6 +55,7 @@
                     {% else %}
                     <td>{{ movie.rtCriticRating }}</td>
                     {% endif %}
+                    <td>{{ av_scores[movie.title] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -64,8 +64,9 @@ def show_movies():
     db = get_db()
     cur = db.execute('SELECT * FROM movies ')
     movies = cur.fetchall()
+    av_scores = avg_scores()
 
-    return render_template('show_movies.html', movies=movies)
+    return render_template('show_movies.html', movies=movies, av_scores=av_scores)
 
 
 @app.route('/add')
@@ -106,3 +107,19 @@ def scrape_movies():
     # Notify the user their post was made successfully
     flash('Your Movie List has been Updated Successfully!')
     return redirect(url_for('start'))
+
+
+def avg_scores():
+    db = get_db()
+    av_scores = {}
+    titles = db.execute('SELECT title FROM movies')
+
+    for movie in titles:
+        av_scores[movie[0]] = db.execute('SELECT ((Coalesce(imdbRating,0) + Coalesce(metaRating,0) + '
+                                         'Coalesce(rtAudienceRating,0) + Coalesce(rtCriticRating,0)) '
+                                         '/(Coalesce(imdbRating/imdbRating, 0) + Coalesce(metaRating/metaRating, 0) + '
+                                         'Coalesce(rtAudienceRating/rtAudienceRating, 0) + '
+                                         'Coalesce(rtCriticRating/rtCriticRating, 0))) FROM movies WHERE title = ?',
+                                         [movie[0]]).fetchall()[0][0]
+
+    return av_scores
