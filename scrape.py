@@ -24,8 +24,12 @@ def scrape_data(addr_imdb, addr_meta):
     imdb_rating = imdb_rating[:3]
     # print('\n\n', imdb_rating)
 
-    meta_rating = soup.find(class_="score-meta").text.strip()
-    # print('\n\n', meta_rating)
+    # print(soup.find(class_="score-meta"))
+    if soup.find(class_="score-meta") is None:
+        meta_rating = ''
+    else:
+        meta_rating = soup.find(class_="score-meta").text.strip()
+        # print('\n\n', meta_rating)
 
     req2 = urllib.request.Request(addr_meta)
     req2.add_header('User-Agent', 'Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) '
@@ -75,19 +79,25 @@ def filter_list():
         ex_list.append(title[0])
     # print(ex_list, '\n\n', init_list)
 
+    duplicates = []
     for title in init_list:
         for t in ex_list:
             if title == t:
-                init_list.remove(title)
+                duplicates.append(title)
+
+    for dup in duplicates:
+        init_list.remove(dup)
 
     print('\n\n', init_list)
-    # return init_list
-    return init_list[:5]
+    return init_list
+    # return init_list[:5]
 
 
 def find_addr():
     movie_list = filter_list()
     url_list = []
+    if movie_list is None:
+        return None
 
     for movie in movie_list:
         params = {'q': movie}
@@ -100,7 +110,7 @@ def find_addr():
         soup = BeautifulSoup(response, 'html.parser')
         url = soup.find(class_="ipc-metadata-list-summary-item__t")
         imdb_url = "https://www.imdb.com/" + url['href']
-        # print('\n\n', imdb_url)
+        print('\n\n', imdb_url)
 
         params2 = {'search': movie}
         response2 = requests.get('https://www.rottentomatoes.com/search', params=params2, headers=headers)
@@ -110,7 +120,7 @@ def find_addr():
         soup2 = BeautifulSoup(response2, 'html.parser')
         url2 = soup2.select('search-page-media-row > a')
         meta_url = url2[0]['href']
-        # print('\n\n', meta_url)
+        print('\n\n', meta_url)
 
         url_list.append((imdb_url, meta_url))
 
