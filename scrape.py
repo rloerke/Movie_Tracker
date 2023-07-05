@@ -16,8 +16,8 @@ def scrape_data(addr_imdb, addr_meta):
     title = title[:(len(title) - 14)]
     # print('\n\n', title)
 
-    description = soup.select('p')[0].text.strip()
-    # print('\n', description)
+    description = soup.select('p > span')[1].text.strip()
+    # print('\n\n', description)
 
     # imdb_rating = soup.select('a')[49].text.strip()
     imdb_rating = soup.find(id="iconContext-star").parent.next_sibling.text.strip()
@@ -60,7 +60,7 @@ def scrape_list():
     list_clean = []
     for movie in movie_list:
         list_clean.append(movie.text.strip()[19:])
-    print('\n\n', list_clean)
+    # print('\n\n', list_clean)
     return list_clean
 
 
@@ -100,7 +100,7 @@ def find_addr():
         soup = BeautifulSoup(response, 'html.parser')
         url = soup.find(class_="ipc-metadata-list-summary-item__t")
         imdb_url = "https://www.imdb.com/" + url['href']
-        print('\n\n', imdb_url)
+        # print('\n\n', imdb_url)
 
         params2 = {'search': movie}
         response2 = requests.get('https://www.rottentomatoes.com/search', params=params2, headers=headers)
@@ -110,13 +110,9 @@ def find_addr():
         soup2 = BeautifulSoup(response2, 'html.parser')
         url2 = soup2.select('search-page-media-row > a')
         meta_url = url2[0]['href']
-        print('\n\n', meta_url)
+        # print('\n\n', meta_url)
 
         url_list.append((imdb_url, meta_url))
 
     print('\n\n', url_list)
     return url_list
-
-
-# scrape_data('https://www.imdb.com/title/tt1397514/',
-#            'https://www.rottentomatoes.com/m/journey_to_the_center_of_the_earth_2_3d')
