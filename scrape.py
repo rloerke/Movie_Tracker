@@ -4,7 +4,7 @@ import urllib
 import app
 
 
-def scrape_data(addr_imdb, addr_meta):
+def scrape_data(addr_imdb, addr_meta, addr_fone):
     req = urllib.request.Request(addr_imdb)
     req.add_header('User-Agent', 'Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) '
                                  'AppleWebKit/605.1.15 ( KHTML, like Gecko) Mobile/15E148')
@@ -12,8 +12,8 @@ def scrape_data(addr_imdb, addr_meta):
     page = urllib.request.urlopen(req).read().decode('utf-8')
     soup = BeautifulSoup(page, 'html.parser')
 
-    title = soup.select('title')[0].text.strip()
-    title = title[:(len(title) - 14)]
+    # title = soup.select('title')[0].text.strip()
+    # title = title[:(len(title) - 14)]
     # print('\n\n', title)
 
     description = soup.select('p > span')[1].text.strip()
@@ -46,6 +46,16 @@ def scrape_data(addr_imdb, addr_meta):
 
     imdb_rating = imdb_rating[0] + imdb_rating[2]
 
+    req3 = urllib.request.Request(addr_fone)
+    req3.add_header('User-Agent', 'Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) '
+                                  'AppleWebKit/605.1.15 ( KHTML, like Gecko) Mobile/15E148')
+    req3.add_header('Accept-Language', 'en-US,en;q=0.8')
+    page3 = urllib.request.urlopen(req3).read().decode('utf-8')
+    soup3 = BeautifulSoup(page3, 'html.parser')
+
+    title = soup3.find(class_="module-title").text.strip()
+    print('\n\n', title)
+
     results = {'title': title, 'description': description, 'imdb_rating': imdb_rating, 'meta_rating': meta_rating,
                'rt_audience': rt_audience, 'rt_critic': rt_critic}
     print('\n\n', results)
@@ -77,13 +87,15 @@ def filter_list():
     ex_list = []
     for title in existing_list:
         ex_list.append(title[0])
-    # print(ex_list, '\n\n', init_list)
+    print(ex_list, '\n\n', init_list)
 
     duplicates = []
     for title in init_list:
         for t in ex_list:
+            print(title, t, (title == t))
             if title == t:
                 duplicates.append(title)
+                print("!!!! ", title, "is a duplicate!")
 
     for dup in duplicates:
         init_list.remove(dup)
@@ -100,7 +112,10 @@ def find_addr():
         return None
 
     for movie in movie_list:
-        params = {'q': movie}
+        if len(movie) > 90:
+            params = {'q': movie[:89]}
+        else:
+            params = {'q': movie}
         headers = {'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 '
                                  '( KHTML, like Gecko) Mobile/15E148', 'Accept-Language': 'en-US,en;q=0.8'}
         response = requests.get('https://www.imdb.com/find', params=params, headers=headers)
@@ -122,7 +137,16 @@ def find_addr():
         meta_url = url2[0]['href']
         print('\n\n', meta_url)
 
-        url_list.append((imdb_url, meta_url))
+        response3 = requests.get('https://www.moviefone.com/search/', params=params, headers=headers)
+        response3 = response3.content.decode()
+        # print('\n\n', response3)
+
+        soup3 = BeautifulSoup(response3, 'html.parser')
+        url3 = soup3.find(class_="search-title").contents
+        fone_url = url3[0]['href']
+        print('\n\n', fone_url)
+
+        url_list.append((imdb_url, meta_url, fone_url))
 
     print('\n\n', url_list)
     return url_list
