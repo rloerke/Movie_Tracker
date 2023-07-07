@@ -97,12 +97,15 @@ def scrape_movies():
     db = get_db()
     url_list = scrape.find_addr()
 
-    for (imdb_url, meta_url) in url_list:
-        data = scrape.scrape_data(imdb_url, meta_url)
-        db.execute('INSERT INTO movies (title, description, imdbRating, metaRating, rtAudienceRating, rtCriticRating) '
-                   'VALUES (?, ?, ?, ?, ?, ?)', [data['title'], data['description'], data['imdb_rating'],
-                                                 data['meta_rating'], data['rt_audience'], data['rt_critic']])
-        db.commit()
+    for (imdb_url, meta_url, fone_url) in url_list:
+        data = scrape.scrape_data(imdb_url, meta_url, fone_url)
+
+        if data is not None:
+            db.execute('INSERT INTO movies '
+                       '(title, description, imdbRating, metaRating, rtAudienceRating, rtCriticRating) '
+                       'VALUES (?, ?, ?, ?, ?, ?)', [data['title'], data['description'], data['imdb_rating'],
+                                                     data['meta_rating'], data['rt_audience'], data['rt_critic']])
+            db.commit()
 
     # Notify the user their post was made successfully
     flash('Your Movie List has been Updated Successfully!')

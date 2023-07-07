@@ -50,16 +50,21 @@ def scrape_data(addr_imdb, addr_meta, addr_fone):
     req3.add_header('User-Agent', 'Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) '
                                   'AppleWebKit/605.1.15 ( KHTML, like Gecko) Mobile/15E148')
     req3.add_header('Accept-Language', 'en-US,en;q=0.8')
-    page3 = urllib.request.urlopen(req3).read().decode('utf-8')
-    soup3 = BeautifulSoup(page3, 'html.parser')
 
-    title = soup3.find(class_="module-title").text.strip()
-    print('\n\n', title)
+    try:
+        page3 = urllib.request.urlopen(req3).read().decode('utf-8')
+        soup3 = BeautifulSoup(page3, 'html.parser')
 
-    results = {'title': title, 'description': description, 'imdb_rating': imdb_rating, 'meta_rating': meta_rating,
-               'rt_audience': rt_audience, 'rt_critic': rt_critic}
-    print('\n\n', results)
-    return results
+        title = soup3.find(class_="module-title").text.strip()[:-7]
+        # print('\n\n', title)
+
+        results = {'title': title, 'description': description, 'imdb_rating': imdb_rating, 'meta_rating': meta_rating,
+                   'rt_audience': rt_audience, 'rt_critic': rt_critic}
+        print('\n\n', results)
+        return results
+
+    except urllib.error.HTTPError:
+        return None
 
 
 def scrape_list():
@@ -124,7 +129,7 @@ def find_addr():
 
         soup = BeautifulSoup(response, 'html.parser')
         url = soup.find(class_="ipc-metadata-list-summary-item__t")
-        imdb_url = "https://www.imdb.com/" + url['href']
+        imdb_url = "https://www.imdb.com" + url['href']
         print('\n\n', imdb_url)
 
         params2 = {'search': movie}
@@ -142,11 +147,13 @@ def find_addr():
         # print('\n\n', response3)
 
         soup3 = BeautifulSoup(response3, 'html.parser')
-        url3 = soup3.find(class_="search-title").contents
-        fone_url = url3[0]['href']
-        print('\n\n', fone_url)
 
-        url_list.append((imdb_url, meta_url, fone_url))
+        if soup3.find(class_="search-title") is not None:
+            url3 = soup3.find(class_="search-title").contents
+            fone_url = url3[0]['href']
+            print('\n\n', fone_url)
+
+            url_list.append((imdb_url, meta_url, fone_url))
 
     print('\n\n', url_list)
     return url_list
