@@ -112,6 +112,15 @@ def scrape_movies():
     return redirect(url_for('start'))
 
 
+@app.route('/del', methods=['POST'])
+def delete_movie():
+    db = get_db()
+    db.execute('DELETE FROM movies WHERE movieID = ?', [request.form['movieID']])
+    db.commit()
+    flash('Movie was Removed')
+    return redirect(url_for('start'))
+
+
 def avg_scores():
     db = get_db()
     av_scores = {}

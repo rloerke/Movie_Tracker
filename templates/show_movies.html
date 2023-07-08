@@ -56,6 +56,12 @@
                     <td>{{ movie.rtCriticRating }}</td>
                     {% endif %}
                     <td>{{ av_scores[movie.title] }}</td>
+                    <td>
+                        <form class="d-grid gap-2 d-md-flex justify-content-md-end p-4" action="{{ url_for('delete_movie') }}" method="post">
+                            <input type="hidden" value="{{ movie.movieID }}" name="movieID">
+                            <button class="btn btn-primary me-md-2" type="submit" id="delete_button">Delete</button>
+                        </form>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
