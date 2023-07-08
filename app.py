@@ -121,6 +121,26 @@ def delete_movie():
     return redirect(url_for('start'))
 
 
+@app.route('/edit', methods=['POST', 'GET'])
+def edit_movie():
+    db = get_db()
+    cur = db.execute('SELECT * FROM movies WHERE movieID = ?', [request.form['movieID']])
+    m_data = cur.fetchone()
+    return render_template('edit_movie.html', data=m_data)
+
+
+@app.route('/edit-db', methods=['POST'])
+def edit_db():
+    db = get_db()
+    db.execute('UPDATE movies SET title=?, description=?, imdbRating=?, metaRating=?, rtAudienceRating=?, '
+               'rtCriticRating=? WHERE movieID=?', [request.form['title'], request.form['description'],
+                                                    request.form['imdbRating'], request.form['metaRating'],
+                                                    request.form['rtAudienceRating'], request.form['rtCriticRating'],
+                                                    request.form['movieID']])
+    db.commit()
+    return redirect(url_for('start'))
+
+
 def avg_scores():
     db = get_db()
     av_scores = {}

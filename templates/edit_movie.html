@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <div class="jumbotron p-1 p-md-1 bg-white text-center">
+        <h1 class="display-4 font-italic" id="category_title">Edit Movie Info</h1>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+          <form class="form-signin" action="{{ url_for('edit_db') }}?id={{ data.movieID }}" method="post">
+            <label for="title_field" class="sr-only">Title</label>
+            <input name="title" class="form-control" value="{{ data.title }}" id="title_field" required autofocus>
+            <label for="description_field" class="sr-only">Description</label>
+            <textarea name="description" class="form-control mt-2" rows="6" id="description_field" required>{{ data.description }}</textarea>
+            <label for="imdb_field" class="sr-only">IMDB Rating</label>
+            <input name="imdbRating" class="form-control" value="{{ data.imdbRating }}" id="imdb_field">
+            <label for="meta_field" class="sr-only">Metacritic Rating</label>
+            <input name="metaRating" class="form-control" value="{{ data.metaRating }}" id="meta_field">
+            <label for="rt_critic_field" class="sr-only">Rotten Tomatoes Critic Rating</label>
+            <input name="rtCriticRating" class="form-control" value="{{ data.rtCriticRating }}" id="rt_critic_field">
+            <label for="rt_audience_field" class="sr-only">Rotten Tomatoes Audience Rating</label>
+            <input name="rtAudienceRating" class="form-control" value="{{ data.rtAudienceRating }}" id="rt_audience_field">
+
+            <input type="hidden" name="movieID" value="{{ data.movieID }}">
+            <button class="btn btn-lg btn-primary btn-block mt-4" type="submit" id="submit_button">Submit</button>
+          </form>
+        </div>
+        <div class="col-4"></div>
+    </div>
+{% endblock %}
