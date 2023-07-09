@@ -57,16 +57,13 @@
                     {% endif %}
                     <td>{{ av_scores[movie.title] }}</td>
                     <td>
-                        <form class="d-grid gap-2 d-md-flex justify-content-md-end p-4" action="{{ url_for('delete_movie') }}" method="post">
-                            <input type="hidden" value="{{ movie.movieID }}" name="movieID">
-                            <button class="btn btn-primary me-md-2" type="submit" id="delete_button">Delete</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form class="d-grid gap-2 d-md-flex justify-content-md-end p-4" action="{{ url_for('edit_movie') }}" method="post">
-                            <input type="hidden" value="{{ movie.movieID }}" name="movieID">
-                            <button class="btn btn-primary me-md-2" type="submit" id="edit_button">Edit</button>
-                        </form>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Options</button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/del?id={{ movie.movieID }}">Delete</a></li>
+                                <li><a class="dropdown-item" href="/edit?id={{ movie.movieID }}">Edit</a></li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
                 {% endfor %}

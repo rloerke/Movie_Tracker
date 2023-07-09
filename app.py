@@ -112,10 +112,10 @@ def scrape_movies():
     return redirect(url_for('start'))
 
 
-@app.route('/del', methods=['POST'])
+@app.route('/del', methods=['POST', 'GET'])
 def delete_movie():
     db = get_db()
-    db.execute('DELETE FROM movies WHERE movieID = ?', [request.form['movieID']])
+    db.execute('DELETE FROM movies WHERE movieID = ?', [request.args.get('id')])
     db.commit()
     flash('Movie was Removed')
     return redirect(url_for('start'))
@@ -124,7 +124,8 @@ def delete_movie():
 @app.route('/edit', methods=['POST', 'GET'])
 def edit_movie():
     db = get_db()
-    cur = db.execute('SELECT * FROM movies WHERE movieID = ?', [request.form['movieID']])
+    print(request.args.get('movieID'))
+    cur = db.execute('SELECT * FROM movies WHERE movieID = ?', [request.args.get('id')])
     m_data = cur.fetchone()
     return render_template('edit_movie.html', data=m_data)
 

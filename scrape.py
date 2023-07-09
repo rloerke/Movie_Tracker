@@ -48,7 +48,7 @@ def scrape_data(addr_imdb, addr_meta, addr_fone):
 
         results = {'title': title, 'description': description, 'imdb_rating': imdb_rating, 'meta_rating': meta_rating,
                    'rt_audience': rt_audience, 'rt_critic': rt_critic}
-        print('\nData found for: ', title)
+        print('\nData found for:', title)
         return results
 
     except urllib.error.HTTPError:
@@ -126,6 +126,7 @@ def find_addr():
         meta_url = url2[0]['href']
 
         url_list.append((imdb_url, meta_url, fone_url))
+        print('\nURLs found for:', movie)
 
     print('\nMovie Addresses Have Been Found Successfully!')
     return url_list
