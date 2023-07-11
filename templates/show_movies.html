@@ -18,7 +18,7 @@
     <main role="main" class="container">
     <div class="row">
 
-        <table class="table">
+        <table class="table" id="data">
             <thead>
                 <tr>
                     <th>Title</th>
@@ -28,6 +28,7 @@
                     <th>Rotten Tomatoes Audience Rating</th>
                     <th>Rotten Tomatoes Critic Rating</th>
                     <th>Average Rating</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -72,4 +73,12 @@
 
     </div>
     </main>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+            $('#data').DataTable();
+        });
+    </script>
 {% endblock %}

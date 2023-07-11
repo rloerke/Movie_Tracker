@@ -2,7 +2,7 @@
 
 import os
 from sqlite3 import dbapi2 as sqlite3
-from flask import Flask, request, session, g, redirect, url_for, render_template, flash
+from flask import Flask, request, g, redirect, url_for, render_template, flash
 import scrape
 
 # Create the application
@@ -51,6 +51,8 @@ def close_db(error):
     # Closes the database again at the end of the request.
     if hasattr(g, 'sqlite_db'):
         g.sqlite_db.close()
+    if error is not None:
+        print("Error:", error)
 
 
 @app.route('/', methods=['GET'])
@@ -97,8 +99,8 @@ def scrape_movies():
     db = get_db()
     url_list = scrape.find_addr()
 
-    for (imdb_url, meta_url, fone_url) in url_list:
-        data = scrape.scrape_data(imdb_url, meta_url, fone_url)
+    for (imdb_url, meta_url, f_url) in url_list:
+        data = scrape.scrape_data(imdb_url, meta_url, f_url)
 
         if data is not None:
             db.execute('INSERT INTO movies '
