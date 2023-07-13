@@ -19,15 +19,15 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
                 {% for movie in movies %}
-                <tr>
+                <tr id="table_column">
                     <td>{{ movie.title }}</td>
                     <td>{{ movie.description }}</td>
                     {% if movie.imdbRating == '' %}
                     <td>None</td>
                     {% else %}
-                    <td>{{ movie.imdbRating }}</td>
+                    <td id="imdb">{{ movie.imdbRating }}</td>
                     {% endif %}
                     {% if movie.metaRating == '' %}
                     <td>None</td>
@@ -35,16 +35,16 @@
                     <td>{{ movie.metaRating }}</td>
                     {% endif %}
                     {% if movie.rtAudienceRating == '' %}
-                    <td>None</td>
+                    <td id="rt_a_n">None</td>
                     {% else %}
-                    <td>{{ movie.rtAudienceRating }}</td>
+                    <td id="rt_a">{{ movie.rtAudienceRating }}</td>
                     {% endif %}
                     {% if movie.rtCriticRating == '' %}
                     <td>None</td>
                     {% else %}
                     <td>{{ movie.rtCriticRating }}</td>
                     {% endif %}
-                    <td>{{ av_scores[movie.title] }}</td>
+                    <td id="avg">{{ av_scores[movie.title] }}</td>
                     <td>
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Options</button>
