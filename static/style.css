@@ -1,9 +1,9 @@
 /* Style for the Navbar */
-#container   {margin-bottom: 1.5rem; background-color: black; padding-bottom: .8rem}
-#buttons_row    {margin-top: -3.4rem; margin-right: 1rem}
-#category_title {color: white; padding-top: .2rem}
-#category_title_f {color: white; padding-top: .2rem; padding-bottom: -2rem}
+#container                  {margin-bottom: 1.5rem; background-color: black; padding-bottom: .8rem}
+#buttons_row                {margin-top: -3.4rem; margin-right: 1rem}
+#category_title             {color: white; padding-top: .2rem}
+#category_title_f           {color: white; padding-top: .2rem; padding-bottom: -2rem}
 
 /* Style for the Table */
 #imdb, #rt_a, #rt_a_n, #avg {background-color: #dae4ef}
-#table_column   {border-bottom-color: darkgray}
+#table_column               {border-bottom-color: darkgray}
