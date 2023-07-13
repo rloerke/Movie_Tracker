@@ -6,5 +6,7 @@ Ray Loerke
 
 ## Sources
 Some initial database code is based on the Flask documentation at https://flask.palletsprojects.com/en/2.3.x/
+
 The javascript library used for the movies table can be found at https://datatables.net/
+
 The Bootstrap documentation can be found at https://getbootstrap.com/
