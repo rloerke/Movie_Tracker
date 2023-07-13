@@ -66,7 +66,17 @@
 {% block scripts %}
     <script>
         $(document).ready(function () {
-            $('#data').DataTable();
+            $('#data').DataTable({
+                columns: [
+                  null,
+                  {orderable: false},
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null],
+              });
         });
     </script>
 {% endblock %}
