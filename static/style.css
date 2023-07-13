@@ -1,2 +1,6 @@
-/* Style for Movies */
-#movies                  { background-color: #f47270; color: black; border: 3px solid black;}
+/* Style for the Navbar */
+#container   {margin-bottom: 1.5rem; background-color: black; padding-bottom: .8rem}
+#buttons_row    {margin-top: -3.4rem; margin-right: 1rem}
+#category_title {color: white; padding-top: .2rem}
+
+#category_title_f {color: white; padding-top: .2rem; padding-bottom: -2rem}

@@ -6,17 +6,40 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 
     <title>Movie Tracker</title>
 </head>
 
-    <div class="page">
+    <div class="page" id="page">
 
       {% for message in get_flashed_messages() %}
         <div class="flash">{{ message }}</div>
       {% endfor %}
+
+                  <div class="container-fluid text-center sticky-top" id="container">
+                <div class="row align-items-center" id="row">
+                    <div class="col" id="site_title">
+                        <h1 class="display-5 font-italic" id="category_title">{% block title %}{% endblock %}</h1>
+                    </div>
+                </div>
+
+                <div class="row align-items-center" id="buttons_row">
+                    <div class="col-10" id="spacer"></div>
+
+                    <div class="col-1" id="add_col">
+                        <a href="/add" class="btn btn-primary" role="button" id="add_button">Add Movie</a>
+                    </div>
+
+                    <div class="col-1" id="scrape_col">
+                        <form class="" action="{{ url_for('scrape_movies') }}" method="post">
+                            <button class="btn btn-primary text-nowrap" type="submit" id="scrape_button">Find New Movies</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
       {% block head %}{% endblock %}
 

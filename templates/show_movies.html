@@ -1,18 +1,6 @@
 {% extends "layout.html" %}
 
-{% block head %}
-    <div class="jumbotron p-1 p-md-1 bg-white text-center">
-        <h1 class="display-4 font-italic" id="category_title">Movies</h1>
-    </div>
-
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end p-4">
-        <a href="/add" class="btn btn-primary me-md-2" role="button" id="add_button">Add Movie</a>
-    </div>
-
-    <form class="d-grid gap-2 d-md-flex justify-content-md-end p-4" action="{{ url_for('scrape_movies') }}" method="post">
-        <button class="btn btn-primary me-md-2" type="submit" id="scrape_button">Find New Movies</button>
-    </form>
-{% endblock %}
+{% block title %}Movie{% endblock %}
 
 {% block body %}
     <main role="main" class="container">
