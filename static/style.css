@@ -3,6 +3,7 @@
 #buttons_row                {margin-top: -3.4rem; margin-right: 1rem}
 #category_title             {color: white; padding-top: .2rem}
 #category_title_f           {color: white; padding-top: .2rem; padding-bottom: -2rem}
+#flash                      {color: white; background-color: black; border-bottom-color: white; border-bottom: 1px; border-bottom: solid}
 
 /* Style for the Table */
 #imdb, #rt_a, #rt_a_n, #avg {background-color: #dae4ef}

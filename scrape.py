@@ -27,11 +27,17 @@ def scrape_data(addr_imdb, addr_meta, addr_fone):
     description = soup.select('p > span')[1].text.strip()
 
     # The IMDB score is pulled out of the html
-    imdb_rating = soup.find(id="iconContext-star").parent.next_sibling.text.strip()
-    imdb_rating = imdb_rating[:3]
+    # imdb_rating = soup.find(id="iconContext-star").parent.next_sibling.text.strip()
+    try:
+        imdb_rating = soup.find(class_="sc-bde20123-2 gYgHoj").text.strip()
+        imdb_rating = imdb_rating[:3]
 
-    # The IMDB rating is converted from a 1/10 format into a 1/100 format to match the other ratings
-    imdb_rating = imdb_rating[0] + imdb_rating[2]
+        # The IMDB rating is converted from a 1/10 format into a 1/100 format to match the other ratings
+        imdb_rating = imdb_rating[0] + imdb_rating[2]
+
+    except AttributeError:
+        print('\nThere was an Attribute Error!')
+        imdb_rating = None
 
     # If the movie has a Metacritic rating, pull it out of the html
     if soup.find(class_="score-meta") is None:

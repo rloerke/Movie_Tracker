@@ -16,7 +16,7 @@
     <div class="page" id="page">
 
       {% for message in get_flashed_messages() %}
-        <div class="flash">{{ message }}</div>
+        <div class="flash" id="flash">{{ message }}</div>
       {% endfor %}
 
                   <div class="container-fluid text-center sticky-top" id="container">
